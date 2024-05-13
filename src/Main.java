@@ -44,6 +44,12 @@ public class Main {
         myList.remove("Banana");
         System.out.println("List after removing 'Banana': " + myList);
 
+        List<Visible> myLista = new ArrayList<>();
+
+        Arena myArena = new Arena(0,15);
+
+
+
     }
 }
 

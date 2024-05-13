@@ -1,10 +1,17 @@
 import java.util.List;
 
-public class Arena {
+public class Arena{
     private int ronda;
     private int tamano;
     private List<Visible> mapa;
     
+
+    // Constructor
+    public Arena(int ronda, int tamano) {
+        this.ronda = ronda;
+        this.tamano = tamano;
+    }
+
 
     public void mostrar(){
 
