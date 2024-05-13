@@ -1,7 +1,11 @@
+import java.util.List;
+
 public class Jugador implements Visible{
     private int vida;
     private int energia;
     private int P_Points;
+    private List<Arma> armas;
+    
 
     public char getRepresentacion(){
         return 'J';
@@ -40,6 +44,14 @@ public class Jugador implements Visible{
     public void set_P_Points(int P_Points){
         this.P_Points=P_Points;
 
+    }
+
+    public List<Arma> get_Armas(){
+        return this.armas;
+    }
+
+    public void set_armas(List<Arma> armas){
+        this.armas = armas;
     }
 
 }

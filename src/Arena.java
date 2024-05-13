@@ -1,6 +1,9 @@
+import java.util.List;
+
 public class Arena {
     private int ronda;
     private int tamano;
+    private List<Visible> mapa;
     
 
     public void mostrar(){
@@ -26,6 +29,14 @@ public class Arena {
     public void set_tamano(int tamano){
         this.tamano=tamano;
 
+    }
+
+    public List<Visible> get_mapa(){
+        return this.mapa;
+    }
+
+    public void set_mapa(List<Visible> mapa){
+        this.mapa = mapa;
     }
 
 
