@@ -15,7 +15,11 @@ public class Main {
 
         Tanke p = new Tanke();
 
+        Husk h = new Husk();
+
         System.out.print(p.get_health()+"\n"); // Printing the integer
+
+        System.out.print(h.getRepresentacion()+"\n"); 
 
     }
 }

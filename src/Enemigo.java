@@ -1,9 +1,15 @@
-public abstract class Enemigo {
+public abstract class Enemigo{
     private int vida;
     private int atk;
     private float prob_torso;
     private float prob_pierna;
     private float prob_cabeza;
+
+
+    //No estoy seguro si este metodo deberia implementarse aqui... creo que no?
+    //public char getRepresentacion(){
+    //    return 'E';
+    //}
 
     public int get_vida(){
         return this.vida;

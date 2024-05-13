@@ -1,8 +1,11 @@
-public class Jugador {
+public class Jugador implements Visible{
     private int vida;
     private int energia;
     private int P_Points;
 
+    public char getRepresentacion(){
+        return 'J';
+    }
 
     public void recibirDano(int dmg){
         this.set_vida(this.get_vida()-dmg);

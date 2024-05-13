@@ -1,3 +1,3 @@
-public class Revolver {
+public class Revolver extends Arma{
     
 }
