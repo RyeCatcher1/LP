@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList; // or LinkedList, Vector, etc.
+import java.util.Collections;
 
 public class Main {
     public static void main(String[] args) {
@@ -48,7 +49,14 @@ public class Main {
 
         Arena myArena = new Arena(0,15);
 
+        int fixedSize = 10;
+        
 
+
+        Runner r = new Runner();
+        r.set_vida(5);
+
+        System.out.println(r.get_vida());
 
     }
 }
