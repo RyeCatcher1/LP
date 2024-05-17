@@ -50,7 +50,9 @@ public class Main {
         Arena myArena = new Arena(0,15);
 
         int fixedSize = 10;
+        List<Person> fixedList = new ArrayList<>(Collections.nCopies(fixedSize, (Visible) null));
 
+        
 
 
 
