@@ -15,6 +15,69 @@ public class Arena{
         }
     }
 
+    // Retorna la posicion del jugador. Devuelve un -1 si no encuentra exactamente 1 jugador
+    public int buscar_jugador(){
+        int pos=-1;
+        int count=0;
+        for (int i = 0; i < this.get_tamano(); i++) {
+            if(mapa[i] instanceof Jugador){
+                pos = i;
+                count = count +1;
+            }
+        }
+        if(count == 1){
+            return pos;
+        }
+        else{
+            return -1;
+        }
+
+    }
+
+    // Retorna la posicion de la terminal. Devuelve un -1 si no encuentra exactamente 1 terminal
+    public int buscar_terminal(){
+        int pos=-1;
+        int count=0;
+        for (int i = 0; i < this.get_tamano(); i++) {
+            if(mapa[i] instanceof Terminal){
+                pos = i;
+                count = count +1;
+            }
+        }
+        if(count == 1){
+            return pos;
+        }
+        else{
+            return -1;
+        }
+
+    }
+
+    public int mover_jugador_izq(){
+        Visible[] mapita = this.get_mapa();
+        int i = buscar_jugador();
+        if(i==-1){
+            return -1; // error
+        }
+        mapita[i-1] = mapita[i];
+        mapita[i] = null;
+
+        return i;
+    }
+
+
+    public int mover_jugador_der(){
+        Visible[] mapita = this.get_mapa();
+        int i = buscar_jugador();
+        if(i==-1){
+            return -1; // error
+        }
+        mapita[i+1] = mapita[i];
+        mapita[i] = null;
+        return i;
+    }
+
+
 
     public void mostrar(){
         for (int i = 0; i < this.get_tamano(); i++) {
@@ -22,9 +85,10 @@ public class Arena{
                 System.err.print("| ");
             }
             else{
-            System.out.print("|" +mapa[i].getRepresentacion() + "|");
+            System.out.print("|" +mapa[i].getRepresentacion());
             }
         }
+        System.out.println("|");
     }
     public void nuevaRonda(){
 

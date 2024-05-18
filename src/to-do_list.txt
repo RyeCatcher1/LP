@@ -1,0 +1,43 @@
+
+
+INNECESARIO mover al jugador a un punto dado (usar mover varias veces a la derecha o izquierda)
+
+DONE funcion que busque al jugador (y tirre error si no hay exactamente 1)
+DONE funcion que busque a la terminal (y tirre error si no hay exactamente 1)
+
+NO ES FACIL MUNDO CIRCULAR funcion que mueve elemento de lista uno a la derecha o izquierda, en este sentido es fácil implementar que el mundo sea circular
+se debe checkear que al moverse a la derecha o izquierda no haya una terminal o enemigo y no se salga de los limites de
+el mapa, en caso de haberlo debe saltarlo
+(además, si despues de 15 saltos virtuales no se encuentrar una casilla vacia, debe saltar error)
+
+ if(i > 0) {
+    Item toMove = arrayList.get(i);
+    arrayList.set(i, arrayList.get(i-1));
+    arrayList.set(i-1, toMove);
+}
+
+DONDE ¿como tener terminal y jugador simultaneamente? NO SE DEBE
+
+DONE programar opciones para el jugador
+DONE (se debe revisar si las casillas adyacentes tienen enemigos/terminales)
+1- Ver estadísticas
+2- Mover izquierda (o terminal izquierda o enemigo izquierda)
+3- Mover derecha (o terminal derecha o enemigo derecha)
+5- Salir
+(4- En caso de haber enemigos) Esquivar daño enemigo
+
+
+Si hay enemigos estos deben efectuar daño
+Si se interactua con enemigo se debe dar la opcion de disparar con una u otra arma a una ora parte del enemigo. Se asignan puntos P
+En caso de matar al enemigo se debe quitar del mapa
+
+Si se interactua con terminal se debe dar la opcion de comprar cosas
+
+Fijar numero de rondas (al menos 3, y poner un contador)
+Una vez elegida una opcion, se verifica si quedan enemigos y si el jugador tiene vida 0.
+
+
+que la funcion nueva ronda cree a los enemigos y mueva al jugador a la posicion 8
+
+
+

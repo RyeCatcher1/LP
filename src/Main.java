@@ -1,5 +1,6 @@
 import java.util.ArrayList; // or LinkedList, Vector, etc.
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,13 +15,12 @@ public class Main {
         // Call the method of MyClass
         yourObject.yourMethod();
 
-        Tanke p = new Tanke();
+        Tanker p = new Tanker();
 
         Husk h = new Husk();
 
-        System.out.print(p.get_health()+"\n"); // Printing the integer
 
-        System.out.print(h.getRepresentacion()+"\n"); 
+        System.out.print(h.getRepresentacion()+"\n");
 
                 // Create an ArrayList of strings
         List<String> myList = new ArrayList<>();
@@ -61,6 +61,77 @@ public class Main {
         arenita.set_mapa(mapita);
 
         arenita.mostrar();
+
+
+
+
+        boolean flag = true;
+        boolean enemigo = false;
+        Scanner scanner = new Scanner(System.in);
+        while(flag){
+            
+            int i = arenita.buscar_jugador();
+            System.out.print("Elige una opción:\n1- Ver estadística\n");
+            if(mapita[i-1] instanceof Terminal){
+                System.out.println("2- Interactuar terminal");
+            }
+            else if(mapita[i-1] instanceof Enemigo){
+                enemigo = true;
+                System.out.println("2- Atacar enemigo");
+            }
+            else{
+                System.out.println("2- Mover izquierda");
+            }
+            if(mapita[i+1] instanceof Terminal){
+                System.out.println("3- Interactuar terminal");
+            }
+            else if(mapita[i+1] instanceof Enemigo){
+                enemigo = true;
+                System.out.println("3- Atacar enemigo");
+            }
+            else{
+                System.out.println("3- Mover derecha");
+            }
+            if(enemigo){
+                System.out.println("4- Esquivar daño");
+                System.out.println("5- Salir");
+            }
+            else{
+                System.out.println("4- Salir");
+            }
+
+            int number = scanner.nextInt();
+
+            System.out.println("You entered: " + number);
+
+            if(number==1){
+                System.out.println("vida es: " + jugadorcito.get_vida());
+                System.out.println("P_points es: " + jugadorcito.get_P_points());
+                System.out.println("energ+ia es: " + jugadorcito.get_energia());
+                System.out.println("lista de armas es:");
+                for(Arma item: jugadorcito.get_Armas()){
+                    System.out.println(" -" + item.getClass().getName());
+                    System.out.println(" -" + "Daño:" + item.get_dano());
+                    System.out.println(" -" + "Precisión:" + item.get_precision());
+                }
+
+
+    
+            }
+            else if(number==2){
+                arenita.mover_jugador_izq();
+            }
+            else if(number==3){
+                arenita.mover_jugador_der();
+            }
+            else if(number==4){
+                flag = false;
+            }
+
+
+            arenita.mostrar();
+            //scanner.close();
+        }
     }
 }
 

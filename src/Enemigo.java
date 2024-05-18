@@ -32,7 +32,7 @@ public abstract class Enemigo{
         return this.prob_torso;
     }
 
-    public void set_prob_torso(int prob_torso){
+    public void set_prob_torso(float prob_torso){
         this.prob_torso=prob_torso;
 
     }
@@ -42,7 +42,7 @@ public abstract class Enemigo{
         return this.prob_pierna;
     }
 
-    public void set_prob_pierna(int prob_pierna){
+    public void set_prob_pierna(float prob_pierna){
         this.prob_pierna=prob_pierna;
 
     }
@@ -51,7 +51,7 @@ public abstract class Enemigo{
         return this.prob_cabeza;
     }
 
-    public void set_prob_cabeza(int prob_cabeza){
+    public void set_prob_cabeza(float prob_cabeza){
         this.prob_cabeza=prob_cabeza;
 
     }
