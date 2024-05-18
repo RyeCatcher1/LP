@@ -28,13 +28,13 @@ DONE (se debe revisar si las casillas adyacentes tienen enemigos/terminales)
 
 
 DONE Si hay enemigos estos deben efectuar daño
-Si se interactua con enemigo se debe dar la opcion de disparar con una u otra arma a una ora parte del enemigo. Se asignan puntos P
-En caso de matar al enemigo se debe quitar del mapa
+DONE Si se interactua con enemigo se debe dar la opcion de disparar con una u otra arma a una parte del enemigo. Se asignan puntos P
+DONE En caso de matar al enemigo se debe quitar del mapa
 
 Si se interactua con terminal se debe dar la opcion de comprar cosas
 
-Fijar numero de rondas (al menos 3, y poner un contador)
-Una vez elegida una opcion, se verifica si quedan enemigos y si el jugador tiene vida 0.
+DONE Fijar numero de rondas (al menos 3, y poner un contador)
+DONE Una vez elegida una opcion, se verifica si quedan enemigos y si el jugador tiene vida 0.
 
 
 DONE que la funcion nueva ronda cree a los enemigos y mueva al jugador a la posicion 8

@@ -123,8 +123,8 @@ public class Arena{
     }
     public void nuevaRonda(){
         this.set_ronda(this.get_ronda()+1);
+        System.out.println("Ronda número " + this.get_ronda());
         int num = this.buscar_jugador()-this.buscar_terminal();
-        System.out.println(num);
         if(num<0){
             for (int i = 0; i < num; i++) {
                 this.mover_jugador(1);
@@ -146,7 +146,7 @@ public class Arena{
 
     }
 
-    public int quitar_enemigos(){
+    public int quitar_enemigos_muertos(){
         int count=0;
         for (int i = 0; i < this.get_tamano(); i++) {
             if(mapa[i] instanceof Enemigo && ((Enemigo)mapa[i]).get_vida()<=0){
