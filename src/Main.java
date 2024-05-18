@@ -69,6 +69,8 @@ public class Main {
         boolean flag = true;
         boolean enemigo = false;
         Scanner scanner = new Scanner(System.in);
+        int dmg=0;
+        int vid=0;
         while(flag){
             //crear lista con los strings que quiero printear
             List<String> imprimir = new ArrayList<>();
@@ -96,9 +98,6 @@ public class Main {
                 enemigo = true;
                 imprimir.add("Atacar enemigo derecha");
             }
-            if(enemigo){
-                imprimir.add("Esquivar daño");
-            }
             imprimir.add("Salir");
 
 
@@ -115,7 +114,7 @@ public class Main {
             if(option=="Ver estadística"){ //Por el momento ver estadistica da tiempo a los enemigos de efectuar daño
                 System.out.println("vida es: " + jugadorcito.get_vida());
                 System.out.println("P_points es: " + jugadorcito.get_P_points());
-                System.out.println("energ+ia es: " + jugadorcito.get_energia());
+                System.out.println("energía es: " + jugadorcito.get_energia());
                 System.out.println("lista de armas es:");
                 for(Arma item: jugadorcito.get_Armas()){
                     System.out.println(" -" + item.getClass().getName());
@@ -133,12 +132,41 @@ public class Main {
             else if(option=="Salir"){
                 flag = false;
             }
+            else if(option == "Atacar enemigo derecha"){
+                dmg = (int)jugadorcito.Disparar((Enemigo)(mapita[pos+1]));
+                System.out.println("Se efectuó " + dmg +" daño al enemigo derecho");
+                if(dmg>0){
+                    jugadorcito.set_P_Points(jugadorcito.get_P_points()+1);
+                }
+            }
+            else if(option == "Atacar enemigo izquierda"){
+                vid = ((Enemigo)(mapita[pos-1])).get_vida();
+                dmg = (int)jugadorcito.Disparar((Enemigo)(mapita[pos-1]));
+                System.out.println("Se efectuó " + dmg +" daño al enemigo izquierdo (pasó de " + vid + " de vida a " + ((Enemigo)(mapita[pos-1])).get_vida() + " de vida");
+                if(dmg>0){
+                    jugadorcito.set_P_Points(jugadorcito.get_P_points()+1);
+                }
+            }
+            else if(option == "Interactuar terminal izquierda"){
 
+            }
+            else if(option == "Interactuar terminal derecha"){
+
+            }
+
+            arenita.quitar_enemigos();
+
+
+
+            dmg = 0;
             if(pos>0 && mapita[pos-1] instanceof Enemigo){
-                jugadorcito.set_vida(jugadorcito.get_vida()- ((Enemigo)mapita[pos-1]).get_atk());
+                dmg = dmg + ((Enemigo)mapita[pos-1]).get_atk();
             }
             if(pos<14 && mapita[pos+1] instanceof Enemigo){
-                jugadorcito.set_vida(jugadorcito.get_vida()- ((Enemigo)mapita[pos+1]).get_atk());
+                dmg = dmg + ((Enemigo)mapita[pos+1]).get_atk();
+            }
+            if(flag){
+            jugadorcito.recibirDano(dmg);
             }
 
 

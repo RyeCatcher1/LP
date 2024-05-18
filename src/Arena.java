@@ -51,7 +51,16 @@ public class Arena{
             System.out.println("Error");
             return -1;
         }
+    }
 
+    public int contar_enemigos(){ // devuelve el número de enemigos en la arena
+        int count=0;
+        for (int i = 0; i < this.get_tamano(); i++) {
+            if(mapa[i] instanceof Enemigo){
+                count = count +1;
+            }
+        }
+        return count;
     }
 
     public int mover_jugador_izq(){
@@ -136,6 +145,18 @@ public class Arena{
 
 
     }
+
+    public int quitar_enemigos(){
+        int count=0;
+        for (int i = 0; i < this.get_tamano(); i++) {
+            if(mapa[i] instanceof Enemigo && ((Enemigo)mapa[i]).get_vida()<=0){
+                mapa[i] = null;
+                count = count+1;
+            }
+        }
+        return count;
+    }
+    
 
     public int get_ronda(){
         return this.ronda;

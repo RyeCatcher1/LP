@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public abstract class Arma {
     private int dano;
     private float precision;
@@ -5,8 +7,14 @@ public abstract class Arma {
 
     // Constructor
 
-    public int CalcularDano(float prob_hit){
-        return (int) (dano*precision*prob_hit);
+    public int calcularDano(float prob_hit){
+        Random random = new Random();
+        // Generate a random float between 0.0 and 1.0
+        float r = random.nextFloat();
+        if(r<precision*prob_hit){
+            return this.dano;
+        }
+        return 0;
     }
 
     public int get_dano(){

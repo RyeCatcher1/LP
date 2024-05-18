@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Jugador implements Visible{
     private int vida;
@@ -23,11 +24,53 @@ public class Jugador implements Visible{
     }
 
     public void recibirDano(int dmg){
+        if(dmg>0 && this.get_energia()>0){
+            int number=0;
+            Scanner scann = new Scanner(System.in);
+            boolean flag = true;
+            while(flag){
+            System.out.println("¿Desea esquivar "+ dmg +" unidades de daño usando 1 de energía?\n 1- Sí\n 2- No");
+            number = scann.nextInt();
+    
+            if(number == 2){
+            this.set_vida(this.get_vida()-dmg);
+            //scann.close();
+            flag = false;
+            }
+            else if(number==1){
+                this.set_energia(this.get_energia()-1);
+                //scann.close();
+                flag = false;
+            }
+            else{
+                System.out.println("Error");
+            }
+        }
+        }
+    else{
         this.set_vida(this.get_vida()-dmg);
     }
+    }
+
 
     public float Disparar(Enemigo enemigo){
-        return 1;
+        int number=0;
+        System.out.println("¿Qué arma desea usar?");
+        List<Arma>armas = this.get_Armas();
+        for (int i = 0; i < armas.size(); i++) {
+            Arma item = armas.get(i);
+            System.out.println(i+1+"-" + item.getClass().getName());
+            System.out.println(" -" + "Daño:" + item.get_dano());
+            System.out.println(" -" + "Precisión:" + item.get_precision());
+        }
+        Scanner scann = new Scanner(System.in);
+        number = scann.nextInt();
+        Arma arma = armas.get(number-1);
+        float dmg = (float)arma.calcularDano(0.5f);
+        enemigo.set_vida(enemigo.get_vida()-(int)dmg);
+        //scann.close();
+
+        return dmg;
     }
 
     public int get_vida(){

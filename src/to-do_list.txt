@@ -37,7 +37,7 @@ Fijar numero de rondas (al menos 3, y poner un contador)
 Una vez elegida una opcion, se verifica si quedan enemigos y si el jugador tiene vida 0.
 
 
-que la funcion nueva ronda cree a los enemigos y mueva al jugador a la posicion 8
+DONE que la funcion nueva ronda cree a los enemigos y mueva al jugador a la posicion 8
 
 
 
