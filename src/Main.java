@@ -1,6 +1,6 @@
-import java.util.List;
 import java.util.ArrayList; // or LinkedList, Vector, etc.
 import java.util.Collections;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,8 +52,7 @@ public class Main {
         int fixedSize = 10;
         List<Person> fixedList = new ArrayList<>(Collections.nCopies(fixedSize, (Visible) null));
 
-        
-
+        r
 
 
         Runner r = new Runner();
