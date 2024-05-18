@@ -3,6 +3,8 @@ public abstract class Arma {
     private float precision;
 
 
+    // Constructor
+
     public int CalcularDano(float prob_hit){
         return (int) (dano*precision*prob_hit);
     }

@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 public class Jugador implements Visible{
     private int vida;
@@ -6,6 +7,16 @@ public class Jugador implements Visible{
     private int P_Points;
     private List<Arma> armas;
     
+
+    // Constructor
+    public Jugador(int vida, int energia, int P_Points) {
+        this.vida = vida;
+        this.energia= energia;
+        this.armas = new ArrayList<>();
+        this.armas.add(new Revolver());
+        this.P_Points = P_Points;
+    }
+
 
     public char getRepresentacion(){
         return 'J';

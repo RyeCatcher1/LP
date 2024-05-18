@@ -1,5 +1,4 @@
 import java.util.ArrayList; // or LinkedList, Vector, etc.
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -45,21 +44,23 @@ public class Main {
         myList.remove("Banana");
         System.out.println("List after removing 'Banana': " + myList);
 
-        List<Visible> myLista = new ArrayList<>();
-
-        Arena myArena = new Arena(0,15);
-
-        int fixedSize = 10;
-        List<Person> fixedList = new ArrayList<>(Collections.nCopies(fixedSize, (Visible) null));
-
-        r
-
 
         Runner r = new Runner();
         r.set_vida(5);
 
         System.out.println(r.get_vida());
+        Arena arenita = new Arena(0, 15);
 
+
+        Terminal terminalcita = new Terminal();
+        Jugador jugadorcito = new Jugador(100,3,0);
+
+        Visible[] mapita = arenita.get_mapa();
+        mapita[8] = jugadorcito;
+        mapita[7] = terminalcita;
+        arenita.set_mapa(mapita);
+
+        arenita.mostrar();
     }
 }
 
