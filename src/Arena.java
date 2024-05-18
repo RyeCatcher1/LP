@@ -48,6 +48,7 @@ public class Arena{
             return pos;
         }
         else{
+            System.out.println("Error");
             return -1;
         }
 
@@ -56,23 +57,44 @@ public class Arena{
     public int mover_jugador_izq(){
         Visible[] mapita = this.get_mapa();
         int i = buscar_jugador();
-        if(i==-1){
-            return -1; // error
-        }
-        mapita[i-1] = mapita[i];
-        mapita[i] = null;
 
-        return i;
+        int salto = 1;
+        while(i -salto>-1){
+            if(mapa[i-salto] == null){
+                mapita[i-salto] = mapita[i];
+                mapita[i] = null;
+                return i;
+            }
+            salto = salto+1;
+        }
+        System.out.println("No hay espacio para moverse a la izquierda");
+        return -1;
+
     }
 
 
     public int mover_jugador_der(){
         Visible[] mapita = this.get_mapa();
         int i = buscar_jugador();
-        if(i==-1){
-            return -1; // error
+
+        int salto = 1;
+        while(i +salto<this.get_tamano()){
+            if(mapa[i+salto] == null){
+                mapita[i+salto] = mapita[i];
+                mapita[i] = null;
+                return i;
+            }
+            salto = salto+1;
         }
-        mapita[i+1] = mapita[i];
+        System.out.println("No hay espacio para moverse a la derecha");
+        return -1;
+
+    }
+
+    public int mover_jugador(int salto){
+        Visible[] mapita = this.get_mapa();
+        int i = buscar_jugador();
+        mapita[i+salto] = mapita[i];
         mapita[i] = null;
         return i;
     }
@@ -91,6 +113,27 @@ public class Arena{
         System.out.println("|");
     }
     public void nuevaRonda(){
+        this.set_ronda(this.get_ronda()+1);
+        int num = this.buscar_jugador()-this.buscar_terminal();
+        System.out.println(num);
+        if(num<0){
+            for (int i = 0; i < num; i++) {
+                this.mover_jugador(1);
+            }
+        }
+        else if(num>1){
+            for (int i = 0; i < num-1; i++) {
+                this.mover_jugador(-1);
+            }
+        }
+        else if(num == 0){
+            System.out.println("Error");
+        }
+
+        this.mapa[10] = new Husk();
+        this.mapa[11] = new Runner();
+        this.mapa[12] = new Tanker();
+
 
     }
 

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        int numero_de_rondas = 3;
         // Instantiate an object of MyClass
         MyClass myObject = new MyClass();
         
@@ -69,42 +70,49 @@ public class Main {
         boolean enemigo = false;
         Scanner scanner = new Scanner(System.in);
         while(flag){
-            
-            int i = arenita.buscar_jugador();
-            System.out.print("Elige una opción:\n1- Ver estadística\n");
-            if(mapita[i-1] instanceof Terminal){
-                System.out.println("2- Interactuar terminal");
+            //crear lista con los strings que quiero printear
+            List<String> imprimir = new ArrayList<>();
+            imprimir.add("Ver estadística");
+
+            int pos = arenita.buscar_jugador();
+            System.out.print("Elige una opción:\n");
+            if(true){
+            imprimir.add("Mover izquierda");
             }
-            else if(mapita[i-1] instanceof Enemigo){
+            if(true){
+                imprimir.add("Mover derecha");
+            }
+            if(pos>0 && mapita[pos-1] instanceof Terminal){
+                imprimir.add("Interactuar terminal izquierda");
+            }
+            else if(pos>0 && mapita[pos-1] instanceof Enemigo){
                 enemigo = true;
-                System.out.println("2- Atacar enemigo");
+                imprimir.add("Atacar enemigo izquierda");
             }
-            else{
-                System.out.println("2- Mover izquierda");
+            if(pos<14 && mapita[pos+1] instanceof Terminal){ //usamos el cortocircuito para no tener problemas con salir del mapa
+                imprimir.add("Interactuar terminal derecha");
             }
-            if(mapita[i+1] instanceof Terminal){
-                System.out.println("3- Interactuar terminal");
-            }
-            else if(mapita[i+1] instanceof Enemigo){
+            else if(pos <14 && mapita[pos+1] instanceof Enemigo){
                 enemigo = true;
-                System.out.println("3- Atacar enemigo");
-            }
-            else{
-                System.out.println("3- Mover derecha");
+                imprimir.add("Atacar enemigo derecha");
             }
             if(enemigo){
-                System.out.println("4- Esquivar daño");
-                System.out.println("5- Salir");
+                imprimir.add("Esquivar daño");
             }
-            else{
-                System.out.println("4- Salir");
+            imprimir.add("Salir");
+
+
+            for (int i = 0; i < imprimir.size(); i++) {
+                System.out.println(i+1 + "- " + imprimir.get(i));
             }
+
 
             int number = scanner.nextInt();
 
             System.out.println("You entered: " + number);
+            String option = imprimir.get(number-1);
 
-            if(number==1){
+            if(option=="Ver estadística"){ //Por el momento ver estadistica da tiempo a los enemigos de efectuar daño
                 System.out.println("vida es: " + jugadorcito.get_vida());
                 System.out.println("P_points es: " + jugadorcito.get_P_points());
                 System.out.println("energ+ia es: " + jugadorcito.get_energia());
@@ -114,23 +122,41 @@ public class Main {
                     System.out.println(" -" + "Daño:" + item.get_dano());
                     System.out.println(" -" + "Precisión:" + item.get_precision());
                 }
-
-
     
             }
-            else if(number==2){
+            else if(option=="Mover izquierda"){
                 arenita.mover_jugador_izq();
             }
-            else if(number==3){
+            else if(option=="Mover derecha"){
                 arenita.mover_jugador_der();
             }
-            else if(number==4){
+            else if(option=="Salir"){
                 flag = false;
+            }
+
+            if(pos>0 && mapita[pos-1] instanceof Enemigo){
+                jugadorcito.set_vida(jugadorcito.get_vida()- ((Enemigo)mapita[pos-1]).get_atk());
+            }
+            if(pos<14 && mapita[pos+1] instanceof Enemigo){
+                jugadorcito.set_vida(jugadorcito.get_vida()- ((Enemigo)mapita[pos+1]).get_atk());
             }
 
 
             arenita.mostrar();
-            //scanner.close();
+            if(jugadorcito.get_vida()<=0){
+                flag = false;
+            }
+
+
+            //arenita.set_ronda(arenita.get_ronda()+1); debe ir en el metodo nueva_ronda
+            if(arenita.buscar_jugador()==14){
+                if(arenita.get_ronda()>numero_de_rondas){
+                    flag = false;
+                }
+                arenita.nuevaRonda();
+                arenita.mostrar();
+                //scanner.close();
+            }
         }
     }
 }

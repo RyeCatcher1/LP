@@ -1,15 +1,15 @@
 
 
-INNECESARIO mover al jugador a un punto dado (usar mover varias veces a la derecha o izquierda)
+DONE mover al jugador a un punto dado (usar mover varias veces a la derecha o izquierda)
 
 DONE funcion que busque al jugador (y tirre error si no hay exactamente 1)
 DONE funcion que busque a la terminal (y tirre error si no hay exactamente 1)
 
 NO ES FACIL MUNDO CIRCULAR funcion que mueve elemento de lista uno a la derecha o izquierda, en este sentido es fácil implementar que el mundo sea circular
-se debe checkear que al moverse a la derecha o izquierda no haya una terminal o enemigo y no se salga de los limites de
+DONE se debe checkear que al moverse a la derecha o izquierda no haya una terminal o enemigo y no se salga de los limites de
 el mapa, en caso de haberlo debe saltarlo
-(además, si despues de 15 saltos virtuales no se encuentrar una casilla vacia, debe saltar error)
 
+DONE 
  if(i > 0) {
     Item toMove = arrayList.get(i);
     arrayList.set(i, arrayList.get(i-1));
@@ -27,7 +27,7 @@ DONE (se debe revisar si las casillas adyacentes tienen enemigos/terminales)
 (4- En caso de haber enemigos) Esquivar daño enemigo
 
 
-Si hay enemigos estos deben efectuar daño
+DONE Si hay enemigos estos deben efectuar daño
 Si se interactua con enemigo se debe dar la opcion de disparar con una u otra arma a una ora parte del enemigo. Se asignan puntos P
 En caso de matar al enemigo se debe quitar del mapa
 
