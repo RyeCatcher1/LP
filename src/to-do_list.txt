@@ -9,7 +9,7 @@ NO ES FACIL MUNDO CIRCULAR funcion que mueve elemento de lista uno a la derecha 
 DONE se debe checkear que al moverse a la derecha o izquierda no haya una terminal o enemigo y no se salga de los limites de
 el mapa, en caso de haberlo debe saltarlo
 
-DONE 
+DONE
  if(i > 0) {
     Item toMove = arrayList.get(i);
     arrayList.set(i, arrayList.get(i-1));
@@ -39,7 +39,24 @@ DONE Una vez elegida una opcion, se verifica si quedan enemigos y si el jugador 
 
 DONE que la funcion nueva ronda cree a los enemigos y mueva al jugador a la posicion 8
 
-arreglar error al comprar escopeta
+DONE arreglar error al comprar escopeta
 
-añadir el tema de las probabilidades para distintas partes del cuerpo
+DONE añadir el tema de las probabilidades para distintas partes del cuerpo
+
+DONE permitir interaccion terminal solo en casilla adyacentes
+
+DONE añadir opcion de hechizos (daño global, chiste y disociar)
+
+makefile
+
+SEGUN CHATGPT NO SE HACE eliminar objetos enemigos?
+
+DONE implementar distintos tamaños posibles para el mapa
+
+modificar adecuadamente precios y estadisticas de armas y enemigos
+
+DONE programar distribucion de enemigos en cada ronda
+
+DONE revisar si estan bien los perdigones de la escopeta
+
 

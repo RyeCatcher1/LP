@@ -5,72 +5,26 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int numero_de_rondas = 3;
-        // Instantiate an object of MyClass
-        MyClass myObject = new MyClass();
-        
-        // Call the method of MyClass
-        //myObject.myMethod();
-
-        YourClass yourObject = new YourClass();
-        
-        // Call the method of MyClass
-        //yourObject.yourMethod();
-
-        Tanker p = new Tanker();
-
-        Husk h = new Husk();
-
-
-        //System.out.print(h.getRepresentacion()+"\n");
-
-                // Create an ArrayList of strings
-        List<String> myList = new ArrayList<>();
-
-        // Add elements to the list
-        myList.add("Apple");
-        myList.add("Banana");
-        myList.add("Orange");
-
-        // Access elements in the list
-        String firstElement = myList.get(0);
-        //System.out.println("First element: " + firstElement);
-
-        // Iterate over the elements in the list
-        //System.out.println("All elements:");
-        for (String element : myList) {
-            //System.out.println(element);
-        }
-
-        // Remove an element from the list
-        myList.remove("Banana");
-        //System.out.println("List after removing 'Banana': " + myList);
-
-
-        Runner r = new Runner();
-        r.set_vida(5);
-
-        //System.out.println(r.get_vida());
-        Arena arenita = new Arena(0, 15);
-
+        int tamano = 15;
+        Arena arenita = new Arena(0, tamano);
 
         Terminal terminalcita = new Terminal();
         Jugador jugadorcito = new Jugador(100,3,0);
 
         Visible[] mapita = arenita.get_mapa();
-        mapita[8] = jugadorcito;
-        mapita[7] = terminalcita;
+
+        mapita[(int)((tamano+1)/2)] = jugadorcito;
+        mapita[(int)((tamano-1)/2)] = terminalcita;
         arenita.set_mapa(mapita);
 
         arenita.nuevaRonda();
         arenita.mostrar();
 
-
+        int mult=1; //factor daño enemigos (ver hechizo Disociar)
         boolean flag = true;
-        boolean enemigo = false;
         Scanner scanner = new Scanner(System.in);
         int dmg=0;
         int vid=0;
-        int j;
         boolean avanzar = true;
         while(flag){
             avanzar = true;
@@ -87,20 +41,19 @@ public class Main {
                 imprimir.add("Mover derecha");
             }
             if(pos>0 && mapita[pos-1] instanceof Terminal){
-                //imprimir.add("Interactuar terminal izquierda");
+                imprimir.add("Interactuar terminal izquierda");
             }
             else if(pos>0 && mapita[pos-1] instanceof Enemigo){
-                enemigo = true;
                 imprimir.add("Atacar enemigo izquierda");
             }
             if(pos<14 && mapita[pos+1] instanceof Terminal){ //usamos el cortocircuito para no tener problemas con salir del mapa
-                //imprimir.add("Interactuar terminal derecha");
+                imprimir.add("Interactuar terminal derecha");
             }
             else if(pos <14 && mapita[pos+1] instanceof Enemigo){
-                enemigo = true;
                 imprimir.add("Atacar enemigo derecha");
             }
-            imprimir.add("Interactuar terminal");
+            //imprimir.add("Interactuar terminal");
+            imprimir.add("Hechizos");
             imprimir.add("Mostrar mapa");
             imprimir.add("Salir del juego");
 
@@ -124,6 +77,9 @@ public class Main {
                     System.out.println("-" + item.getClass().getName());
                     System.out.println(" -" + "Daño:" + item.get_dano());
                     System.out.println(" -" + "Precisión:" + item.get_precision());
+                    if(item instanceof Escopeta){
+                        System.out.println(" -" + "Perdigones:" + ((Escopeta)item).get_perdigones());
+                    }
                 }
                 avanzar = false;
     
@@ -138,6 +94,7 @@ public class Main {
                 flag = false;
             }
             else if(option == "Atacar enemigo derecha"){
+
                 dmg = (int)jugadorcito.Disparar((Enemigo)(mapita[pos+1]));
                 System.out.println("Se efectuó " + dmg +" daño al enemigo derecho");
                 if(dmg>0){
@@ -152,32 +109,66 @@ public class Main {
                     jugadorcito.set_P_Points(jugadorcito.get_P_points()+10);
                 }
             }
-            else if(option == "Interactuar terminal izquierda"){
+            else if(option == "Interactuar terminal"){
 
             }
-            else if(option == "Interactuar terminal derecha"){
+            else if(option == "Interactuar terminal"){
 
             }
+            else if(option == "Hechizos"){
+                System.out.println("Lista de hechizos (2 de energía cada uno):");
+            System.out.println(1 +"- Cenizas: 10 de daño global.");
+            System.out.println(2  +"- Disociar: Pierde la mitad de la vida restante, pero los enemigos causan la mitad de daño por el resto de la partida");
+            System.out.println(3  +"- if(false): No hace nada... ¿o sí?");
+            System.out.println(4 + "- Salir (Nota: Al comprar está expuesto al daño enemigo, mas no al salir del menú)");
+
+            number = scanner.nextInt();
+            if(number==1){
+                jugadorcito.set_energia(jugadorcito.get_energia()-2);
+                for (int i = 0; i < tamano; i++){
+                    if(mapita[i] instanceof Enemigo){
+                        ((Enemigo)mapita[i]).set_vida( ((Enemigo)mapita[i]).get_vida()-10);
+                    }
+            }}
+            else if(number==2){
+                jugadorcito.set_energia(jugadorcito.get_energia()-2);
+                jugadorcito.set_vida((int)(jugadorcito.get_vida()/2));
+                mult = 2;
+            }
+            else if(number==3){
+                System.out.println(3  +"- NaN... ¿o YaN...?");
+                //efectivamente no hace nada
+            }
+            else if (number==4){
+                avanzar = false;
+            }
+            else{
+                System.out.println("Error");
+            }
+        }
             else if(option== "Mostrar mapa"){
                 arenita.mostrar();
                 avanzar = false;
             }
-            else if(option== "Interactuar terminal"){
-                System.out.println("Lista de armas:");
+            else if(option== "Interactuar terminal izquierda" || option== "Interactuar terminal derecha"){
+                System.out.println("Lista de venta:");
                 for (int i = 0; i < terminalcita.get_armas_disponibles().size(); i++) {
                     Arma item =  terminalcita.get_armas_disponibles().get(i);
                     System.out.println(i+1+"- " + item.getClass().getName());
-                    System.out.println("  -" + "Precio: " + item.get_dano() + item.get_precision() + " P_Points");
-                    System.out.println("  -" + "Daño:" + item.get_dano());
-                    System.out.println("  -" + "Precisión:" + item.get_precision());
+                    System.out.println("   -" + "Precio: " + item.get_dano() + item.get_precision() + " P_Points");
+                    System.out.println("   -" + "Daño:" + item.get_dano());
+                    System.out.println("   -" + "Precisión:" + item.get_precision());
+                    if(item instanceof Escopeta){
+                        System.out.println("   -" + "Perdigones:" + ((Escopeta)item).get_perdigones());
+                    }
             }
-            System.out.println(terminalcita.get_armas_disponibles().size() + 1 +"- Comprar 50 vida:");
-            System.out.println(terminalcita.get_armas_disponibles().size() + 2  +"- Comprar 1 energía:");
+            System.out.println(terminalcita.get_armas_disponibles().size() + 1 +"- Comprar 50 vida por 50 P_Points:");
+            System.out.println(terminalcita.get_armas_disponibles().size() + 2  +"- Comprar 1 energía por 10 P_Points:");
             System.out.println(terminalcita.get_armas_disponibles().size() + 3 + "- Salir de terminal (Nota: Al comprar está expuesto al daño enemigo, mas no al salir de la terminal)");
 
             number = scanner.nextInt();
             if(number <terminalcita.get_armas_disponibles().size()+1){
-                terminalcita.ComprarArma(jugadorcito,terminalcita.get_armas_disponibles().get(number),(int)(terminalcita.get_armas_disponibles().get(number).get_dano() + terminalcita.get_armas_disponibles().get(number).get_precision()));
+                terminalcita.ComprarArma(jugadorcito,terminalcita.get_armas_disponibles().get(number-1),(int)(terminalcita.get_armas_disponibles().get(number-1).get_dano() + terminalcita.get_armas_disponibles().get(number-1).get_precision()));
             }
             else if(number==terminalcita.get_armas_disponibles().size() + 2){
                 terminalcita.ComprarEnergia(jugadorcito);
@@ -208,7 +199,7 @@ public class Main {
 
             if(avanzar){
             if(flag){
-            jugadorcito.recibirDano(dmg);
+            jugadorcito.recibirDano((int)(dmg/mult));
             }
 
 
@@ -232,6 +223,7 @@ public class Main {
             }
         }
         }
+        scanner.close();
     }
 }
 

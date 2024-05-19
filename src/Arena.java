@@ -103,8 +103,14 @@ public class Arena{
     public int mover_jugador(int salto){
         Visible[] mapita = this.get_mapa();
         int i = buscar_jugador();
+        if(mapita[i+salto] instanceof Terminal){
+            mapita[i+salto+1] = mapita[i];
+            mapita[i] = null;
+        }
+        else{
         mapita[i+salto] = mapita[i];
         mapita[i] = null;
+        }
         return i;
     }
 
@@ -126,7 +132,7 @@ public class Arena{
         System.out.println("Ronda número " + this.get_ronda());
         int num = this.buscar_jugador()-this.buscar_terminal();
         if(num<0){
-            for (int i = 0; i < num; i++) {
+            for (int i = 0; i < -num; i++) {
                 this.mover_jugador(1);
             }
         }
@@ -139,10 +145,36 @@ public class Arena{
             System.out.println("Error");
         }
 
-        this.mapa[10] = new Husk();
+        if(this.get_ronda()==1){
+        this.mapa[1] = new Husk();
         this.mapa[11] = new Runner();
         this.mapa[12] = new Tanker();
-
+        }
+        else if(this.get_ronda()==2){
+            this.mapa[10] = new Husk();
+            this.mapa[3] = new Runner();
+            this.mapa[12] = new Tanker();
+        }
+        else if(this.get_ronda()==3){
+            this.mapa[1] = new Husk();
+            this.mapa[4] = new Runner();
+            this.mapa[3] = new Tanker();
+        }
+        else if(this.get_ronda()==4){
+            this.mapa[10] = new Husk();
+            this.mapa[12] = new Runner();
+            this.mapa[3] = new Tanker();
+        }
+        else if(this.get_ronda()==5){
+            this.mapa[1] = new Husk();
+            this.mapa[2] = new Runner();
+            this.mapa[3] = new Tanker();
+        }
+        else{
+            this.mapa[1] = new Husk();
+            this.mapa[2] = new Runner();
+            this.mapa[3] = new Tanker();
+        }
 
     }
 

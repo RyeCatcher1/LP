@@ -8,12 +8,24 @@ public abstract class Arma {
     // Constructor
 
     public int calcularDano(float prob_hit){
+        int count=1;
         Random random = new Random();
         // Generate a random float between 0.0 and 1.0
+        if(this instanceof Escopeta){
+            for (int i = 0; i < ((Escopeta)this).get_perdigones()-1; i++) {
+                float r = random.nextFloat();
+                if(r<precision*prob_hit){
+                    count = count+1;
+                }
+        }
+        return this.dano * count;
+    }
+        else{
         float r = random.nextFloat();
         if(r<precision*prob_hit){
             return this.dano;
         }
+    }
         return 0;
     }
 

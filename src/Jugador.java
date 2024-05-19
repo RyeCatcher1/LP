@@ -55,6 +55,7 @@ public class Jugador implements Visible{
 
     public float Disparar(Enemigo enemigo){
         int number=0;
+        float prob_hit=0;
         System.out.println("¿Qué arma desea usar?");
         List<Arma>armas = this.get_Armas();
         for (int i = 0; i < armas.size(); i++) {
@@ -62,13 +63,44 @@ public class Jugador implements Visible{
             System.out.println(i+1+"-" + item.getClass().getName());
             System.out.println(" -" + "Daño:" + item.get_dano());
             System.out.println(" -" + "Precisión:" + item.get_precision());
+            if(item instanceof Escopeta){
+                System.out.println(" -" + "Perdigones:" + ((Escopeta)item).get_perdigones());
+            }
         }
-        Scanner scann = new Scanner(System.in);
-        number = scann.nextInt();
+
+
+        Scanner sca = new Scanner(System.in);
+        number = sca.nextInt();
         Arma arma = armas.get(number-1);
-        float dmg = (float)arma.calcularDano(0.5f);
+
+        System.out.println("¿A qué parte desea disparar?");
+            System.out.println(1+" -" + "Torso");
+            System.out.println(2+" -" + "Pierna");
+            System.out.println(3+" -" + "Cabeza");
+        
+        boolean flagg=true;
+        while(flagg){
+        number = sca.nextInt();
+        if(number==0){
+            prob_hit = enemigo.get_prob_cabeza();
+            flagg=false;
+        }
+        else if(number==1){
+            prob_hit = enemigo.get_prob_torso();
+            flagg=false;
+        }
+        else if(number==2){
+            prob_hit = enemigo.get_prob_pierna();
+            flagg=false;
+        }
+        else{
+            System.out.println("Error");
+        }
+    }
+
+        float dmg = (float)arma.calcularDano(prob_hit);
         enemigo.set_vida(enemigo.get_vida()-(int)dmg);
-        //scann.close();
+        //sca.close();
 
         return dmg;
     }
